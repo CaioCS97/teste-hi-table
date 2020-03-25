@@ -11,13 +11,9 @@ const PlanetDropdown = () => {
     const [planet, setPlanet] = useState('')
 
     const useStyles = makeStyles(theme => ({
-        formControl: {
-          margin: theme.spacing(1),
+        select: {
           minWidth: 250,
-        },
-        selectEmpty: {
-          marginTop: theme.spacing(2),
-        },
+        }
       }));
     const classes = useStyles();
 
@@ -34,22 +30,16 @@ const PlanetDropdown = () => {
 
     return (
         <div>
-            <FormControl className={classes.formControl}>
-                <div>
-                    <TextField id="description" label="Description" />
-                </div>
-                <br/>
-                
-                <InputLabel id="select-planets-label">Planets</InputLabel>
-                <Select
-                    labelId="select-planets-label"
-                    id="select-planets"
-                    value={planet ? planet : ''}
-                    onChange={handleChange}>
-                    {planets?.map((planet, index) =>
-                        <MenuItem value={planet.name} key={index}>{planet.name}</MenuItem>)}
-                </Select>
-            </FormControl>
+            <InputLabel id="select-planets-label">Planets</InputLabel>
+            <Select
+                className={classes.select}
+                labelId="select-planets-label"
+                id="select-planets"
+                value={planet ? planet : ''}
+                onChange={handleChange}>
+                {planets?.map((planet, index) =>
+                    <MenuItem value={planet.name} key={index}>{planet.name}</MenuItem>)}
+            </Select>
         </div>
     )
 }
