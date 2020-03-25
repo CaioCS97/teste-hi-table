@@ -3,7 +3,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
 
-import CardComponent from "./CardComponent";
+import CardComponent from "./components/CardComponent";
 
 const App = () => {
   const useStyles = makeStyles(theme => ({

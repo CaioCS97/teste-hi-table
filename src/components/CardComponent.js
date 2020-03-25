@@ -6,9 +6,7 @@ import { Card, FormControl, TextField, Tooltip, IconButton } from '@material-ui/
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import AddIcon from '@material-ui/icons/Add';
 
-
-
-import PlanetsDropdown from './PlanetDropdown'
+import PlanetsDropdown from './PlanetDropdown/PlanetDropdown'
 
 const CardComponent = () => {
     const useStyles = makeStyles(theme => ({
