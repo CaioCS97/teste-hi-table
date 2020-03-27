@@ -1,0 +1,28 @@
+.container {
+    max-width: sm
+}
+.cards {
+  min-height: 150px;
+  min-width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form {
+  display: flex;
+  flex-direction: row;
+
+}
+.formControl {
+  margin: 15px;
+  min-width: 25px;
+}
+.textField {
+  margin-bottom: 20px;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

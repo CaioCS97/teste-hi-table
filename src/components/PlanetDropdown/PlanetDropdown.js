@@ -4,6 +4,8 @@ import { Select, MenuItem, InputLabel, FormControl, TextField } from '@material-
 
 import Axios from 'axios';
 
+import './PlanetDropdown.scss'
+
 
 const PlanetDropdown = () => {
 
@@ -32,7 +34,7 @@ const PlanetDropdown = () => {
         <div>
             <InputLabel id="select-planets-label">Planets</InputLabel>
             <Select
-                className={classes.select}
+                className="select"
                 labelId="select-planets-label"
                 id="select-planets"
                 value={planet ? planet : ''}
