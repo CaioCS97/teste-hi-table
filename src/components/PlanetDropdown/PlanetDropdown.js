@@ -5,11 +5,10 @@ import { Select, MenuItem, InputLabel, FormControl, TextField } from '@material-
 import Axios from 'axios';
 
 import './PlanetDropdown.scss'
-
-
-const PlanetDropdown = () => {
-
+ 
+const PlanetDropdown = ({playback}) => {
     const [planets, setPlanets] = useState()
+
     const [planet, setPlanet] = useState('')
 
     const useStyles = makeStyles(theme => ({
@@ -27,7 +26,9 @@ const PlanetDropdown = () => {
     }, []);    
 
     const handleChange = event => {
-        setPlanet(event.target.value);        
+        setPlanet(event.target.value);
+        playback(event.target.value)
+        //console.log(planet);
     };
 
     return (

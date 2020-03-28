@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, FormControl, TextField, Tooltip, IconButton } from '@material-ui/core';
+import { Card, FormControl, TextField, Tooltip, IconButton, Button } from '@material-ui/core';
 
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import AddIcon from '@material-ui/icons/Add';
@@ -43,6 +43,7 @@ const CardComponent = ({item, index, addItem, remove}) => {
     const classes = useStyles();
 
     const [value, setValue] = useState("");
+    const [planetValue, setPlanetValue] = useState("");
 
     // const [items, setItems] = useState([
     //   {
@@ -58,12 +59,25 @@ const CardComponent = ({item, index, addItem, remove}) => {
 
     const handleSubmit = e => {     
       e.preventDefault();
-      
+      console.log()
       console.log(value);
       if (!value) return;
       App.addItem(value);
-      setValue("");
+      setValue(e.target.value);
     }
+
+    const onclickTeste = e => {     
+      e.preventDefault()
+      console.log("0--------->",  e.target)
+      setValue("xptop")
+      console.log(value)
+    }
+
+    const callback= e =>{
+      console.log("----AAAAAA libaba , kalifa esta de olho   --->",e)
+      setPlanetValue(e)
+    }
+
 
     // const addItem = text => {
     //   const newItems = [...items, { text }];
@@ -72,12 +86,14 @@ const CardComponent = ({item, index, addItem, remove}) => {
 
     return (
       <Card className="cards">
+        
+        Leticia esta no mundo da  {planetValue} times
         <form className="form" onSubmit={handleSubmit} autoComplete="off">
           <FormControl className="formControl">
-            <PlanetDropdown />
-            <TextField className="textField" label="Description" />
+            <PlanetDropdown playback={callback} />
+            <TextField className="textField"  id="lblpto" onChange={event => setValue(event.target.value)} label="Description" />
+            <Button onClick={onclickTeste}>Botao Capirotico  </Button>
           </FormControl>
-
             <div className="buttons">
               <Tooltip title="Excluir">
                 <IconButton>
