@@ -1,49 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Select, MenuItem, InputLabel, FormControl, TextField } from '@material-ui/core';
-
-import Axios from 'axios';
+import { Select, MenuItem, InputLabel } from '@material-ui/core';
 
 import './PlanetDropdown.scss'
- 
-const PlanetDropdown = ({playback}) => {
-    const [planets, setPlanets] = useState()
+import Api from '../../services/api'
 
-    const [planet, setPlanet] = useState('')
+const PlanetDropdown = ({ callbackPlanets }) => {
+  const [planets, setPlanets] = useState()
+  const updatePlanetsState = (planets) => setPlanets(planets)
 
-    const useStyles = makeStyles(theme => ({
-        select: {
-          minWidth: 250,
-        }
-      }));
-    const classes = useStyles();
+  useEffect(() => {
+    Api.GetAllPlanets(updatePlanetsState)
+  }, []);
 
-    useEffect(() => {
-        Axios.get(`https://swapi.co/api/planets/?format=json`)
-        .then(res => {
-            setPlanets(res.data.results);       
-        });
-    }, []);    
+  const handleChange = event => {
+    callbackPlanets(event.target.value)
+  };
 
-    const handleChange = event => {
-        setPlanet(event.target.value);
-        playback(event.target.value)
-        //console.log(planet);
-    };
-
-    return (
-        <div>
-            <InputLabel id="select-planets-label">Planets</InputLabel>
-            <Select
-                className="select"
-                labelId="select-planets-label"
-                id="select-planets"
-                value={planet ? planet : ''}
-                onChange={handleChange}>
-                {planets?.map((planet, index) =>
-                    <MenuItem value={planet.name} key={index}>{planet.name}</MenuItem>)}
-            </Select>
-        </div>
-    )
+  return (
+    <div>
+      <InputLabel id="select-planets-label">Planets</InputLabel>
+      <Select
+        className="select"
+        labelId="select-planets-label"
+        id="select-planets"
+        onChange={handleChange}>
+          <MenuItem>--</MenuItem>
+        {planets?.map((planet, index) =>
+          <MenuItem value={planet.name} key={index}>{planet.name}</MenuItem>)}
+      </Select>
+    </div>
+  )
 }
 export default PlanetDropdown;
