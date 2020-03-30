@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Divider } from "@material-ui/core";
+import { Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Tooltip, IconButton } from "@material-ui/core";
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+
 
 import CardComponent from "../CardComponent/CardComponent";
 import './Tasks.scss'
 
-import ListIcon from '@material-ui/icons/List';
-
 const Tasks = () => {
-  const [tasks, setTasks] = useState([{}]);
+  const [tasks, setTasks] = useState([]);
 
   const addTask = task => {
     const newTasks = [...tasks, { task }];
@@ -16,42 +16,52 @@ const Tasks = () => {
   };
 
   const removeTask = index => {
-    const newTasks = [...tasks, { index }];
-    console.log('before', newTasks);
+    const newTasks = [...tasks];
     newTasks.splice(index, 1);
-    console.log('after', newTasks);
-
     setTasks(newTasks);
-    console.log("aqui index=>", index);
-    console.log("aqui tasks=>", tasks);
   }
-  console.log(tasks.length);
 
+  const TableRowResult = () => {
+    return (
+      tasks.map((task, index) => (
+        <TableRow key={index}>
+          <TableCell>{task.task.planetValue}</TableCell>
+          <TableCell>{task.task.description}</TableCell>
+          <TableCell>
+            <Tooltip title="Excluir">
+              <IconButton className="button" onClick={() => removeTask(index)}>
+                <DeleteOutlineIcon fontSize="small" color="secondary" />
+              </IconButton>
+            </Tooltip>
+          </TableCell>
+        </TableRow>
+      ))
+    )
+  }
 
   return (
-    <div className="container">
-      {tasks.map((task, index) => (
+    <div className="center">
+      <div className="container">
         <CardComponent
-          key={index}
-          index={index}
-          item={task}
           addTask={addTask}
-          removeTask={removeTask}
         />
-      ))}
-      {tasks.map((task, index) => (
-        <List>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <ListIcon />
-              </Avatar>
-            </ListItemAvatar>
-              <ListItemText primary={task.planetValue} secondary={task.description} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </List>
-      ))}
+      </div>
+      <div className="table">
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Planeta</TableCell>
+                <TableCell>Descrição</TableCell>
+                <TableCell className="headerExcluir">Excluir</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRowResult />
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };
